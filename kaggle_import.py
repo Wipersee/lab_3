@@ -64,11 +64,14 @@ with io.open('vgsales.csv', newline='', encoding='utf-8') as csvfile:
                                                             int(dict_platform[row['Platform']]),
                                                             year_to_int(row['Year']),
                                                             row['Name']))
+            cursor.execute("""INSERT INTO sales(game_rank, NA_sales,
+                            EU_sales, JP_sales, Other_sales)
+                            VALUES(:1, :2, :3, :4, :5)""", (int(row['Rank']), float(row['NA_Sales']), 
+                                                float(row['EU_Sales']),float(row['JP_Sales']), float(row['Other_Sales'])))
         except UnicodeEncodeError:
             count += 1
 
 print(str(count)+' lines passed because of UnicodeEncodeError')
 
 my_conn.commit()
-
 cursor.close()
