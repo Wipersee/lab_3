@@ -10,7 +10,7 @@ def year_to_int(year):
         int(year)
         return int(year)
     except ValueError:
-        return 0
+        return 2017
 
 with io.open('vgsales.csv', newline='', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
